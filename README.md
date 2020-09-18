@@ -2,11 +2,11 @@
 
 ## General
 
-This project is a simple API project that manages persons and thier favorite colors. There are multiple datasources (CSV file and database) and it's easy extendable to new datasources. The framework used for this project is Asp.NET Core (C#)
+This project is a simple API project that manages persons and their favorite colors. There are multiple datasources (CSV file and database) and it's easily extendable to new datasources. The framework used for this project is Asp.NET Core (C#).
 
 ## Solution and projects
 
-The solution (Assecor.sln) contains 5 projects. One API project, 3 class libraries and one testing project.
+The solution (Assecor.sln) contains 5 projects. One API project, 3 class libraries, and one testing project.
 
 Projects:
 * Assecor.Core (class lib)
@@ -20,50 +20,50 @@ Projects:
 This is the core project of the solution. It contains:
 * Domain models - Person and Color
 * Data transfer objects (DTOs) - PersonDto
-* Service intefaces - IPersonService
+* Service interfaces - IPersonService
 * Exceptions that will be used in the app
 * Const/Default Data - List of default Colors
 
 ### Assecor.API Project
 
 This is an API start project. It contains 
-* Controllers - PersonsController and abstract BaseController with shared methods like Handle(Exceiption ex) method that handles all the exceptions on one place.
+* Controllers - PersonsController and abstract BaseController with shared methods like Handle(Exception ex) method that handles all exceptions in one place.
 * Startup configuration
 * appsettings.json
 
 ### Assecor.API.Tests
 
-This projects contains tests for the API project. It uses XUnit and Moq.
+This project contains tests for the API project. It uses XUnit and Moq.
 
 ### Assecor.CSV and Assecor.EF
 
-These two projects contain PersonService class that implements IPersonService from the Assecor.Core project on their own way with their custom logic.
+These two projects both contain a PersonService class that implements IPersonService from the Assecor.Core project in their own way with their custom logic.
 
 Assecor.CSV uses helper classes to read/write data from/to the CSV file.
 Assecor.EF uses EF Core to read/write data in the database.
 
-They both have IServiceCollection extension method, where the scopes and dependecies are registered, so they can be easily referenced in the Startup.cs of the API project.
+They both have the IServiceCollection extension method, where the scopes and dependencies are registered, so they can be easily referenced in the Startup.cs of the API project.
 
-Assecor.CSV registers its implementation of IPersonService, binds FileConnectionsCofiguration file from the appsettings.json's section, registers its AutoMapper Profile.
-Assecor.EF registers its implementation of IPersonService, its DbContext and its AutoMapper Profile.
+Assecor.CSV registers its implementation of IPersonService, binds the FileConnectionsCofiguration file from the appsettings.json's section, registers its AutoMapper Profile.
+Assecor.EF registers its implementation of IPersonService, its DbContext, and its AutoMapper Profile.
 
 ## How to setup the project
 
 ### Using CSV file
 
-If you are using a CSV as a datasource, open appsettings.json in the Assecor.API project and set a path to your CSV file in "FileConnections" section. Go to the Startup.cs class in the API project and uncomment the line ```services.AddCsvServices(Configuration);```. Run the app.
+If you are using a CSV as a datasource, open appsettings.json in the Assecor.API project and set a path to your CSV file in the "FileConnections" section. Go to the Startup.cs class in the API project and uncomment the line ```services.AddCsvServices(Configuration);```. Run the app.
 
 ### Using database
 
-If you are going to use a database connection, open appsettings.json in the Assecor.API project and set your connection string in "ConnectionStrings" section. Than open the terminal and naviagte to the Assecor.EF project folder. Run "dotnet ef database update" command to create database and apply the migrations. There are two tables in the database (created based on domain models from the Assecor.Core project). The table Colors is already seeded with default colors (using Fluent API and list of default colors from the Core project). Go to the Startup.cs class in the API project and uncomment the line ```services.AddEfServices(options => options.UseSqlServer(Configuration.GetConnectionString("Assecor")));``` where string "Assecor" is the name of your connection in appsettings.json. Run the app.
+If you are going to use a database connection, open appsettings.json in the Assecor.API project and set your connection string in the "ConnectionStrings" section. Then open the terminal and navigate to the Assecor.EF project folder. Run "dotnet ef database update" command to create a database and apply the migrations. There are two tables in the database (created based on domain models from the Assecor.Core project). The table Colors is already seeded with default colors (using Fluent API and list of default colors from the Core project). Go to the Startup.cs class in the API project and uncomment the line ```services.AddEfServices(options => options.UseSqlServer(Configuration.GetConnectionString("Assecor")));``` where string "Assecor" is the name of your connection in appsettings.json. Run the app.
 
 ### Using a third new datasouce
 
-Create a new project. Add a reference to the Assecor.Core project. Implement IPersonService with your custom methods. Register your service interface implemntation in the Startup.cs. Run the app.
+Create a new project. Add a reference to the Assecor.Core project. Implement IPersonService with your custom methods. Register your service interface implementation in the Startup.cs. Run the app.
 
 ### Conclusion
 
-Controllers in the API project depend on interfaces from the Core project and they do not depend on their implementation. So the only thing you have to do is to register your interface implementations in Startup.cs without changing any code in Controllers. 
+Controllers in the API project depend on interfaces from the Core project and they do not depend on their implementation. So the only thing you have to do is to register your interface implementations in Startup.cs without changing any code in Controllers or the Core project. 
 
 Note: if you are using vscode, in order to run the app, you need to open Assecor.API project folder in the terminal and run "dotnet run" command
 
