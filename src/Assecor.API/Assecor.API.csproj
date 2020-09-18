@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="../Assecor.Core/Assecor.Core.csproj" />
+    <ProjectReference Include="../Assecor.CSV/Assecor.CSV.csproj" />
+    <ProjectReference Include="../Assecor.EF/Assecor.EF.csproj" />
+  </ItemGroup>
+
+  <Target Name="Build">
+        <MSBuild 
+            Projects="..\Assecor.sln"
+            Properties="Configuration=Release"
+            Targets="Clean;Build"
+            ContinueOnError="false"
+            StopOnFirstFailure="true"/>
+    </Target>
+
+</Project>

@@ -1,0 +1,32 @@
+# Build results
+[Dd]ebug/
+[Dd]ebugPublic/
+[Rr]elease/
+[Rr]eleases/
+x64/
+x86/
+build/
+bld/
+[Bb]in/
+[Oo]bj/
+[Oo]ut/
+
+# Assecor.API 
+src/Assecor.API/[Bb]in/
+src/Assecor.API/[Oo]bj/
+
+# Assecor.Core
+src/Assecor.Core/[Bb]in/
+src/Assecor.Core/[Oo]bj/
+
+# Assecor.CSV
+src/Assecor.CSV/[Bb]in/
+src/Assecor.CSV/[Oo]bj/
+
+# Assecor.EF 
+src/Assecor.EF/[Bb]in/
+src/Assecor.EF/[Oo]bj/
+
+# Assecor.API 
+tests/Assecor.API.Tests/[Bb]in/
+tests/Assecor.API.Tests/[Oo]bj/
